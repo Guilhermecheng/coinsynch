@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { FiCheck } from "react-icons/fi";
 
-export function Modal() {
+export function LogInModal() {
     const { modalType, setModalType } = useContext(GlobalContext);
 
 

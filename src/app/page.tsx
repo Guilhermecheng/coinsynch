@@ -4,8 +4,9 @@ import { useContext } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Header } from "@/components/Header";
-import { Modal } from "@/components/Modal";
+import { LogInModal } from "@/components/LogInModal";
 import { GlobalContext } from '@/contexts/GlobalContext';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
   const { setModalType } = useContext(GlobalContext);
@@ -15,8 +16,10 @@ export default function Home() {
       <Dialog.Root>
         <Header />
         Home
-        <Modal />
+        <LogInModal />
       </Dialog.Root>
+
+      <Footer />
     </main>
   )
 }
