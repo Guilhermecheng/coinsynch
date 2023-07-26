@@ -6,38 +6,13 @@ import { useContext } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { RiCloseLine } from "react-icons/ri";
 
+import { cryptoList } from '@/lib/utils';
+
 interface AddCryptoProps {
     setModalState: (arg: boolean) => void;
 }
 
 export function AddCrypto({ setModalState }: AddCryptoProps) {
-    const cryptoList = [
-        {
-            crypto: "BTC",
-            name: "Bitcoin",
-            logo: "/bitcoin.svg",
-        },
-        {
-            crypto: "ETH",
-            name: "Ethereum",
-            logo: "/ethereum.svg",
-        },
-        {
-            crypto: "ADA",
-            name: "Cardano",
-            logo: "/cardano.svg",
-        },
-        {
-            crypto: "SOL",
-            name: "Solana",
-            logo: "/solana.svg",
-        },
-        {
-            crypto: "USDC",
-            name: "USD Coin",
-            logo: "/usdcoin.svg",
-        },
-    ];
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { setUserData, userData } = useContext(GlobalContext);
@@ -84,13 +59,16 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                     <select
                         placeholder='Choose'
                         className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 outline-none"
-                        {...register("crypto")}
+                        {...register("crypto", { required: true })}
                     >
                         { cryptoList.map((crypto, i) => {
                             return (
                                 <option key={i} value={crypto.crypto}>
-                                    <img src={crypto.logo} alt={crypto.name} />
-                                    <span>{crypto.name}</span>
+                                    <div className="flex items-center justify-center">
+                                        <img src={crypto.logo} alt={crypto.name} />
+                                        {crypto.name} 
+                                        {/* <span className='text-secondary-500 ml-2'>{crypto.crypto}</span> */}
+                                    </div>
                                 </option>
                             )
                         }) }
@@ -99,7 +77,7 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                     <input 
                         type="number" 
                         placeholder="Quantity" 
-                        className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mt-3.5 md:mt-6"
+                        className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mt-3.5 md:mt-6 outline-none[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         {...register("quantity", { required: true })}
                     />
 

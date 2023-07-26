@@ -34,7 +34,7 @@ export default function Dashboard() {
                 <Header />
             </DropdownMenu.Root>
             
-            <div className="h-full bg-dashback">
+            <div className="h-full sm:h-[calc(100%-116px)] md:h-[calc(100%-128px)] bg-dashback">
                 <VerticalMenu />
 
                 <div id="dashboard" className="relative md:w-[calc(100%-90px)] h-full md:ml-[90px]">

@@ -11,7 +11,7 @@ export function VerticalMenu() {
     return (
         <div 
             id="vertical-menu" 
-            className={`absolute h-full ${isVertMenuOpen ? "w-[240px]" : "w-0 md:w-[86px]"} z-20 transition-all items-center justify-center bg-white border-t-2 border-b-2 border-secondary-300`}
+            className={`absolute h-full sm:h-[calc(100%-116px)] md:h-[calc(100%-128px)] ${isVertMenuOpen ? "w-[240px]" : "w-0 md:w-[86px]"} z-20 transition-all items-center justify-center bg-white border-t-2 border-b-2 border-secondary-300`}
             onMouseOver={() => setIsVertMenuOpen(true)}
             onMouseOut={() => setIsVertMenuOpen(false)}
         >
