@@ -8,6 +8,17 @@ import { RiCloseLine } from "react-icons/ri";
 
 import { cryptoList } from '@/lib/utils';
 
+interface CoinProps {
+    crypto: string;
+    name: string;
+    logo: string;
+}
+
+interface WalletProps {
+    crypto: string;
+    average_price: number;
+    quantity: number;
+}
 
 interface TransferCryptoProps {
     setModalState: (arg: boolean) => void;
@@ -21,21 +32,76 @@ interface TransferCryptoProps {
 export function TransferCrypto({ setModalState, selectedCrypto }: TransferCryptoProps) {
     const { setUserData, userData } = useContext(GlobalContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [youRTransfering, setYouRTransfering] = useState({
+    const [youRTransfering, setYouRTransfering] = useState<CoinProps>({
         crypto: "",
         name: "",
         logo: "",
-    })
+    });
+    const [wallet, setWallet] = useState<WalletProps | null>(null);
+    const [max, setMax] = useState(0);
     
     useEffect(() => {
         let selection = cryptoList.find(item => item.crypto === selectedCrypto.crypto);
+        let isInWallet = userData?.wallet.find(item => item.crypto === selectedCrypto.crypto);
         if(selection) {
             setYouRTransfering(selection);
         }
+
+        if(isInWallet) {
+            setWallet(isInWallet);
+            setMax(isInWallet.quantity);
+        }
     }, [selectedCrypto])
+
+    function setMaxValue(e: React.ChangeEvent<HTMLSelectElement>) {
+        event?.preventDefault();
+        let isInWallet = userData?.wallet.find(item => item.crypto === selectedCrypto.crypto);
+
+        if(e.target.value === "in") {
+            setMax(10000000000000000000000)
+        } else if(e.target.value === "out") {
+            if(isInWallet) {
+                setMax(isInWallet.quantity);
+            }
+        }
+        console.log(max); // my onChange
+    }
 
     function transferCrypto(data: FieldValues) {
         console.log(data, selectedCrypto)
+        let newQty = Number(data.quantity);
+
+
+        if(userData) {
+            let newData = userData;
+            let coinIndex = newData.wallet.findIndex(item => item.crypto === selectedCrypto.crypto);
+            if(coinIndex >= 0) {
+                let coin = newData.wallet[coinIndex];
+
+                if(data.transferType === "out") {
+                    if(newQty == coin.quantity) {
+                        console.log("removinng")
+                        newData.wallet.splice(coinIndex, 1);
+                        setUserData(newData);
+                        setModalState(false);
+    
+                    } else if (newQty < coin.quantity) {
+                        let sum = coin.quantity - newQty;
+                        newData.wallet[coinIndex].quantity = sum;
+                        setUserData(newData);
+                        setModalState(false);
+    
+                    }
+                    
+                } else if(data.transferType === "in") {
+                    let sum = coin.quantity + newQty;
+                    newData.wallet[coinIndex].quantity = sum;
+                    setUserData(newData);
+                    setModalState(false);
+                }
+            }
+        }
+
     }
     
 
@@ -63,7 +129,8 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                             id="in-or-out"
                             placeholder='Choose'
                             className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mb-3.5 md:mb-6 outline-none text-secondary-400"
-                            {...register("crypto", { required: true })}
+                            {...register("transferType", { required: true })}
+                            onChange={(e) => setMaxValue(e)}
                         >
                             <option value="in">Transfer in</option>
                             <option value="out">Transfer out</option>
@@ -75,8 +142,16 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                             type="number" 
                             placeholder="0.00" 
                             className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 outline-none text-secondary-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            {...register("quantity", { required: true })}
+                            {...register("quantity", { 
+                                required: true,
+                                min: 0,
+                                value: 0,
+                                max: max
+                             })}
                         />
+                        { wallet && <span className='text-sm ml-1 mt-1 text-secondary-400'>{`In wallet: ${wallet.quantity}`}</span> }
+                        { errors.quantity && wallet && <span className='text-sm ml-1 mt-1 text-quartenary-500'>{`Please insert a quantity between 0 and ${wallet.quantity} ${wallet.crypto}`}</span> }
+
 
                         <button type="submit" className="mt-3.5 md:mt-6 flex items-center justify-center w-full bg-primary-500 text-white rounded-full py-3.5">
                             Transfer Crypto

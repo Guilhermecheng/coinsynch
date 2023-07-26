@@ -19,7 +19,8 @@ export function LogInModal() {
     const router = useRouter();
 
     async function login(data: FieldValues) {
-        const response = await axios.get("http://localhost:8080/users");
+        // const response = await axios.get("http://localhost:8080/users");
+        const response = await axios.get("/api/users");
         if(response) {
             console.log(response.data);
             var found = response.data.find((e:any) => e.email === data.email);
