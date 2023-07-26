@@ -1,16 +1,32 @@
 'use client';
 
-import { useContext } from "react";
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect } from "react";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { GlobalContext } from "@/contexts/GlobalContext";
 import { VerticalMenu } from "@/components/VerticalMenu";
+import { Wallet } from "@/components/Wallet";
 
 
 export default function Dashboard() {
-    const { isVertMenuOpen, setIsVertMenuOpen } = useContext(GlobalContext);
+    const { isVertMenuOpen, userData } = useContext(GlobalContext);
+    const router = useRouter();
+
+    if(!userData) {
+        router.push("/");
+        return (
+            <>
+                Loading...
+            </>
+        )
+    }
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div className="h-[100vh]">
@@ -65,77 +81,7 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <div 
-                        id="wallet"
-                        className=" text-basecolor flex flex-col items-center justify-center mx-6 sm:mx-14 lg:mx-16 py-6 sm:py-10 lg:py-14 border-t-2 border-secondary-300"
-                    >
-                        <div className="flex w-full justify-between items-center">
-                            <div className="flex gap-x-4 items-center">
-                                <img src="/wallet.svg" alt="My Wallet" />
-                                <h1 className="text-lg sm:text-2xl font-bold whitespace-nowrap">My Wallet</h1>
-                            </div>
-                            <button className="py-2 px-4 bg-primary-500 text-white flex rounded-full">+<span className="hidden sm:flex sm:ml-2">Add crypto</span></button>
-                        </div>
-
-
-                        <ul id="mobile-wallet" className="grid grid-cols-2 sm:hidden">
-                            <li>
-                                <h1>
-                                    Bitcoin BTC
-                                </h1>
-
-                                <div>
-                                    <h3>Holdings</h3>
-                                    <span>US$ 25.499,52</span>
-                                    <span>434 BTC</span>
-                                </div>
-
-                                <div>
-                                    <h3>Change</h3>
-                                    <button>Trade</button>
-                                </div>
-                            </li>
-
-                            <li>
-                                <h1>
-                                    Bitcoin BTC
-                                </h1>
-
-                                <div>
-                                    <h3>Holdings</h3>
-                                    <span>US$ 25.499,52</span>
-                                    <span>434 BTC</span>
-                                </div>
-
-                                <div>
-                                    <h3>Change</h3>
-                                    <button>Trade</button>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <table id="desktop-wallet" className="hidden sm:flex sm:flex-col sm:w-full">
-                            <tr>
-                                <th>#</th>
-                                <th>Crypto</th>
-                                <th>Holdings</th>
-                                <th>Change</th>
-                                <th>Trade</th>
-                            </tr>
-
-                            <tr>
-                                <td>1</td>
-                                <td>Bitcoin BTC</td>
-                                <td>
-                                    US$ 25.499,52
-                                    <span>434 BTC</span>
-                                </td>
-                                <td>+5.2%</td>
-                                <td>trade symboel</td>
-                            </tr>
-                            
-                        </table>
-                    </div>
+                    <Wallet />
 
                 </div>
             </div>  

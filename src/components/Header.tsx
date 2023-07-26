@@ -8,19 +8,30 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { BiChevronDown } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CoinCarousel } from "./CoinCarousel";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "@/contexts/GlobalContext";
+import axios from "axios";
 
 export function Header() {
     const pathname = usePathname();
     const router = useRouter();
 
-    const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserLogin } = useContext(GlobalContext);
+    const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
+    const [username, setUsername] = useState("");
 
     function logout() {
-        setUserLogin("");
+        setUserData(null);
         router.push("/");
     }
+
+    async function getApiData() {
+        const response = await axios.get("http://localhost:8080/users");
+        return response;
+    }
+
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
 
     if(pathname === "/") {
         return(
@@ -76,7 +87,7 @@ export function Header() {
                 <DropdownMenu.Trigger className="outline-none">
                     <div className="flex items-center gap-x-2">
                         <img src="https://github.com/Guilhermecheng.png" className="h-8 rounded-full" alt="Avatar" />
-                        <span className="hidden md:flex">Ronald</span>
+                        <span className="hidden md:flex">{userData?.name}</span>
                         <BiChevronDown size={16} className="cursor-pointer" />
                     </div>
                 </DropdownMenu.Trigger>
