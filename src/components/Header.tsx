@@ -17,7 +17,6 @@ export function Header() {
     const router = useRouter();
 
     const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
-    const [username, setUsername] = useState("");
 
     function logout() {
         setUserData(null);

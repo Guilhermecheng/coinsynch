@@ -12,7 +12,7 @@ export function Cards() {
     }, [])
 
     return(
-        <motion.div ref={carousel} className="cursor-grab overflow-hidden pt-6 px-6">
+        <motion.div ref={carousel} className="cursor-grab overflow-hidden pt-6 px-6 pb-14 bg-linear-gradient">
             <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="flex w-full">
                 <motion.div id="card-1" className='h-[260px] min-w-[200px] p-6 shadow-xl rounded-md'>
                     <img src="/coins.svg" className='h-10 sm:h-16' alt="" />
