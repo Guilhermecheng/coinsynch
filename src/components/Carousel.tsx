@@ -13,9 +13,9 @@ export function Carousel() {
     return (
         <section id="carousel-section" className="w-full h-[270px] md:h-[398px] lg:h-[655px] flex flex-col items-center pt-14 md:pt-16">
             <div className='flex flex-col items-center w-full h-[60%] lg:h-full px-8 md:flex-row md:gap-x-16 max-w-[1264px]'>
-                <div className='flex flex-col items-center md:items-start'>
-                    <h1 className='text-xl text-primary-500 font-bold text-center md:text-start'>Lorem ipsum dolor sit amet, consectetur</h1>
-                    <p className='text-sm text-basecolor text-center md:text-start mt-2 mb-6'>
+                <div className='flex flex-col items-center md:items-start lg:pt-12'>
+                    <h1 className='text-xl md:text-3xl lg:text-5xl text-primary-500 font-bold text-center md:text-start'>Lorem ipsum dolor sit amet, consectetur</h1>
+                    <p className='text-sm md:text-base lg:text-xl text-basecolor text-center md:text-start mt-2 mb-6'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor
                     </p>
 
@@ -25,6 +25,12 @@ export function Carousel() {
                             <BsArrowRight size={12} className="ml-4" />
                         </button>
                     </Dialog.Trigger>
+
+                    <div className='flex gap-x-8 mt-6 md:mt-10 lg:mt-20'>
+                        <span>Crypto</span>
+                        <span>Games</span>
+                        <span>NFT</span>
+                    </div>
                 </div>
 
                     <ReactCarousel 
