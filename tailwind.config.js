@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'linear-gradient': 'background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #F7F7F7 100%)'
+      },
       colors: {
         basecolor: "#5D6670",
         dashback: "#F9F9F9",
