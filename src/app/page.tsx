@@ -1,5 +1,4 @@
 'use client';
-import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';

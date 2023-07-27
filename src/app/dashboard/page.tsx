@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useContext, useEffect } from "react";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -13,20 +13,10 @@ import { Wallet } from "@/components/Wallet";
 
 export default function Dashboard() {
     const { isVertMenuOpen, userData } = useContext(GlobalContext);
-    const router = useRouter();
 
     if(!userData) {
-        router.push("/");
-        return (
-            <>
-                Loading...
-            </>
-        )
+        redirect("/");
     }
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div className="h-[100vh]">
