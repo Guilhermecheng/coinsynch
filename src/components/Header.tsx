@@ -17,15 +17,11 @@ export function Header() {
     const router = useRouter();
 
     const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
+    const [mobileLoginMenu, setMobileLoginMenu] = useState(false);
 
     function logout() {
         setUserData(null);
         router.push("/");
-    }
-
-    async function getApiData() {
-        const response = await axios.get("http://localhost:8080/users");
-        return response;
     }
 
     useEffect(() => {
@@ -49,19 +45,36 @@ export function Header() {
                     </div>
 
                     <div className="hidden sm:flex gap-x-6 items-center justify-center">
-                    <Dialog.Trigger asChild aria-controls="modal-content" id="header-signin" onClick={() => setModalType("signin")}>
-                        <span className="cursor-pointer">Sign In</span>
-                    </Dialog.Trigger>
+                        <Dialog.Trigger asChild aria-controls="modal-content" id="header-signin" onClick={() => setModalType("signin")}>
+                            <span className="cursor-pointer">Sign In</span>
+                        </Dialog.Trigger>
 
-                    <Dialog.Trigger asChild aria-controls="modal-content" id="header-signup" onClick={() => setModalType("signup")}>
-                        <span className="px-4 py-2 rounded-full bg-primary-500 text-white cursor-pointer">Sign Up</span>
-                    </Dialog.Trigger>
-
+                        <Dialog.Trigger asChild aria-controls="modal-content" id="header-signup" onClick={() => setModalType("signup")}>
+                            <span className="px-4 py-2 rounded-full bg-primary-500 text-white cursor-pointer">Sign Up</span>
+                        </Dialog.Trigger>
                     </div>
 
-                    <div className="flex sm:hidden">
-                        <RxHamburgerMenu size={16} />
-                    </div>
+                    <DropdownMenu.Root>
+                        <DropdownMenu.Trigger className="flex sm:hidden outline-none">
+                            <RxHamburgerMenu size={16} />
+                        </DropdownMenu.Trigger>
+
+                        <DropdownMenu.Portal>
+                            <DropdownMenu.Content className="bg-white shadow-xl py-4 px-4 rounded flex flex-col items-center justify-center gap-y-4 border-2 border-secondary-300" sideOffset={10}>
+                                <DropdownMenu.Item className="outline-none cursor-pointer text-basecolor" onClick={logout}>
+                                    <Dialog.Trigger asChild aria-controls="modal-content"  onClick={() => setModalType("signin")}>
+                                        <span className="cursor-pointer">Sign In</span>
+                                    </Dialog.Trigger>
+                                </DropdownMenu.Item>
+                                <DropdownMenu.Separator className="h-[1px] w-full bg-secondary-300" />
+                                <DropdownMenu.Item className="outline-none cursor-pointer text-primary-500" onClick={logout}>
+                                    <Dialog.Trigger asChild aria-controls="modal-content" onClick={() => setModalType("signup")}>
+                                        <span className="cursor-pointer">Sign up</span>
+                                    </Dialog.Trigger>
+                                </DropdownMenu.Item>
+                            </DropdownMenu.Content>
+                        </DropdownMenu.Portal>
+                    </DropdownMenu.Root>
 
                 </div>
 
