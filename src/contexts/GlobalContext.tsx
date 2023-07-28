@@ -10,6 +10,23 @@ interface CoinProps {
     price: number;
 }
 
+interface TopCoinsProps {
+    data: {
+        id: string;
+        rank: string;
+        symbol: string;
+        name: string;
+        supply: string;
+        maxSupply: string;
+        marketCapUsd: string;
+        volumeUsd24Hr: string;
+        priceUsd: string;
+        changePercent24Hr: string;
+        vwap24Hr: string;
+        explorer: string;
+    }[]
+}
+
 interface UserDataProps {
     name: string;
     email: string ;
@@ -32,6 +49,9 @@ interface GlobalContextProps {
 
     topCryptos: CoinProps[];
     setTopCryptos: Dispatch<SetStateAction<CoinProps[]>>;
+
+    topAssets: TopCoinsProps | null;
+    setTopAssets: Dispatch<SetStateAction<TopCoinsProps | null>>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -46,6 +66,9 @@ export const GlobalContext = createContext<GlobalContextProps>({
 
     topCryptos:  [],
     setTopCryptos: () => {},
+
+    topAssets: null,
+    setTopAssets: () => {},
 });
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
@@ -54,6 +77,8 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
 
     const [userData, setUserData] = useState<UserDataProps | null>(null);
     const [topCryptos, setTopCryptos] = useState<CoinProps[]>([]);
+    const [topAssets, setTopAssets] = useState<TopCoinsProps | null>(null);
+
 
     return (
         <GlobalContext.Provider value={{ 
@@ -67,7 +92,10 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             setUserData,
 
             topCryptos,
-            setTopCryptos
+            setTopCryptos,
+
+            topAssets, 
+            setTopAssets
          }}>
             {children}
         </GlobalContext.Provider>

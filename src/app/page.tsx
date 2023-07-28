@@ -14,27 +14,15 @@ import axios from 'axios';
 import { cryptoList } from '@/lib/utils';
 
 export default function Home() {
-  const { setModalType, topCryptos, setTopCryptos } = useContext(GlobalContext);
+  const { setModalType, topCryptos, topAssets, setTopAssets } = useContext(GlobalContext);
 
     useEffect(() => {
-      async function fetchExchangeRates() {
-        try {
-          const assets = ['BTC', 'ETH', 'XRP'];
-          const promises = cryptoList.map(asset =>
-            axios.get(`https://rest.coinapi.io/v1/exchangerate/${asset.crypto}/USD?apikey=${process.env.COINAPI_KEY}`)
-          );
-          const responses = await Promise.all(promises);
-          
-          cryptoList.forEach((crypto,i) => {
-            crypto.price = responses[i].data.rate
-          })
-          setTopCryptos(cryptoList);
-
-        } catch (err) {
-          console.log(err);
-        }
+      async function getTopAssets() {
+        const response = await axios.get(`https://api.coincap.io/v2/assets`);
+        console.log(response)
+        setTopAssets(response.data);
       }
-      fetchExchangeRates();
+      getTopAssets();
     }, []);
 
   return (

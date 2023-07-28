@@ -6,25 +6,36 @@ import { motion, useScroll } from "framer-motion";
 
 
 export function CoinCarousel() {
-  const { topCryptos } = useContext(GlobalContext);
+  const { topAssets } = useContext(GlobalContext);
   const [width, setWidth] = useState(0);
     const carousel = useRef() as MutableRefObject<HTMLDivElement>;
 
+    // useEffect(() => {
+    //     setWidth(carousel?.current.scrollWidth - carousel?.current.offsetWidth);
+    // }, [])
+
     useEffect(() => {
-        setWidth(carousel?.current.scrollWidth - carousel?.current.offsetWidth);
-    }, [])
+        console.log(topAssets)
+    }, [topAssets])
+
+    if(topAssets === null) {
+        return (
+            <>Loading..</>
+        )
+    }
 
     return (
         <div ref={carousel} className="flex text-xs md:text-sm max-w-[344px] overflow-hidden">
             <ul className="flex no-wrap gap-x-6 overflow-hidden">
 
-                { topCryptos.map((crypto, i) => {
-                    let change = (Math.random() * 2 - 1) * 10;
+                { topAssets.data.map((asset: any, i: number) => {
+                    let price = Number(asset.priceUsd);
+                    let change = Number(asset.changePercent24Hr)
 
                     return(
                         <li key={i} className='flex gap-x-2 '>
-                            <span>{crypto.crypto}</span>
-                            <span>{crypto.price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}</span>
+                            <span>{asset.symbol}</span>
+                            <span>{price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}</span>
                             <span className={`${change > 0 ? "text-tertiary-700" : "text-quartenary-700"}`}>{`${change.toFixed(2)} %`}</span>
                         </li>
                     )
