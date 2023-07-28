@@ -8,6 +8,8 @@ import { GlobalContext } from '@/contexts/GlobalContext';
 import { Footer } from '@/components/Footer';
 import { Carousel } from '@/components/Carousel';
 import { Solutions } from '@/components/Solutions';
+import { TopCryptos } from '@/components/TopCryptos';
+import { Newsletter } from '@/components/Newsletter';
 
 export default function Home() {
   const { setModalType } = useContext(GlobalContext);
@@ -24,6 +26,8 @@ export default function Home() {
         <LogInModal />
       </Dialog.Root>
 
+      <TopCryptos />
+      <Newsletter />
       <Footer />
     </main>
   )
