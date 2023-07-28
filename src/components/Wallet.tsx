@@ -18,6 +18,7 @@ export function Wallet() {
         quantity: 0,
     });
 
+
     if(!userData) {
         return (
             <div>
@@ -90,8 +91,9 @@ export function Wallet() {
 
                         { userData.wallet.map((wallet_item, i) => {
                             return (
-                                <tr key={i + 1}>
-                                    <td>{i}</td>
+                                <tr key={i}>
+
+                                    <td>{i + 1}</td>
                                     <td>{wallet_item.crypto}</td>
                                     <td>
                                         { wallet_item.average_price }
