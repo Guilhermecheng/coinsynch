@@ -7,6 +7,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { RiCloseLine } from "react-icons/ri";
 
 import { cryptoList } from '@/lib/utils';
+import axios from 'axios';
 
 interface AddCryptoProps {
     setModalState: (arg: boolean) => void;
@@ -15,35 +16,61 @@ interface AddCryptoProps {
 export function AddCrypto({ setModalState }: AddCryptoProps) {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { setUserData, userData } = useContext(GlobalContext);
+    const { setUserData, userData, walletUpdated, setWalletUpdated } = useContext(GlobalContext);
 
-    function addCrypto(data: FieldValues) {
-        let newQty = Number(data.quantity);
-        if(userData) {
-            let avgPrice = 1000;
-            let userCryptos = userData;
-            let isOnWallet = userCryptos.wallet.findIndex(item => item.crypto === data.crypto);
+    async function addCrypto(data: FieldValues) {
+        console.log("tentando")
 
-            if(isOnWallet >= 0) {
-                let oldPrice = userCryptos.wallet[isOnWallet].average_price;
-                let oldQty = userCryptos.wallet[isOnWallet].quantity;
-                userCryptos.wallet[isOnWallet].average_price = ( (oldPrice * oldQty) + (avgPrice * newQty) ) / (oldQty + newQty);
-                userCryptos.wallet[isOnWallet].quantity = oldQty + newQty;
+        const crypto = cryptoList.find(as => as.crypto === data.crypto);
+        if(crypto) {
+            console.log("tentando")
+            let newQty = Number(data.quantity);
+            
+            const response = await axios.get(`https://api.coincap.io/v2/assets/${crypto.id}`);
+            const avgPrice = Number(response?.data.data.priceUsd);
 
+            if(userData && walletUpdated) {
+                let userCryptos = userData;
+                let wallet = walletUpdated;
+
+                let isOnUserWallet = userCryptos.wallet.findIndex(item => item.crypto === data.crypto);
+                let isOnUpdatedWallet = walletUpdated.findIndex(item => item.crypto === data.crypto);
+
+                if(isOnUserWallet >= 0) {
+                    let oldPrice = userCryptos.wallet[isOnUserWallet].average_price;
+                    let oldQty = userCryptos.wallet[isOnUserWallet].quantity;
+                    userCryptos.wallet[isOnUserWallet].average_price = ( (oldPrice * oldQty) + (avgPrice * newQty) ) / (oldQty + newQty);
+                    userCryptos.wallet[isOnUserWallet].quantity = oldQty + newQty;
+
+                    wallet[isOnUpdatedWallet].average_price = ((oldPrice * oldQty) + (avgPrice * newQty) ) / (oldQty + newQty);
+                    wallet[isOnUpdatedWallet].quantity = oldQty + newQty;
+
+                    setUserData(userCryptos);
+                    setWalletUpdated(wallet);
+                    setModalState(false);
+                } else {
+                    userCryptos.wallet.push({
+                        crypto: data.crypto as string,
+                        average_price: avgPrice,
+                        quantity: newQty,
+                    })
+                    
+                    wallet.push({
+                        crypto: data.crypto as string,
+                        average_price: avgPrice,
+                        quantity: newQty,
+                        assetName: response?.data.data.name,
+                        updatedPrice: avgPrice,
+                        logo: crypto?.logo,
+                    })
+                }
                 setUserData(userCryptos);
+                setWalletUpdated(wallet);
                 setModalState(false);
-            } else {
-                userCryptos.wallet.push({
-                    crypto: data.crypto as string,
-                    average_price: avgPrice,
-                    quantity: newQty,
-                })
             }
-            setUserData(userCryptos);
-            setModalState(false);
+            console.log(userData)
         }
     }
-
 
     return (
         <Dialog.Portal>
@@ -67,7 +94,6 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                                     <div className="flex items-center justify-center">
                                         <img src={crypto.logo} alt={crypto.name} />
                                         {crypto.name} 
-                                        {/* <span className='text-secondary-500 ml-2'>{crypto.crypto}</span> */}
                                     </div>
                                 </option>
                             )

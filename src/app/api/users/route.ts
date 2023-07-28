@@ -9,17 +9,17 @@ export async function GET() {
                 "wallet": [
                 {
                     "crypto": "BTC",
-                    "average_price": 100000,
+                    "average_price": 27000,
                     "quantity": 300
                 },
                 {
                     "crypto": "ETH",
-                    "average_price": 4000,
+                    "average_price": 3200,
                     "quantity": 1000
                 },
                 {
                     "crypto": "SOL",
-                    "average_price": 200,
+                    "average_price": 15.4,
                     "quantity": 5000
                 }
                 ]
@@ -31,7 +31,7 @@ export async function GET() {
                 "wallet": [
                 {
                     "crypto": "BTC",
-                    "average_price": 95000,
+                    "average_price": 12000,
                     "quantity": 500
                 },
                 {
@@ -53,7 +53,7 @@ export async function GET() {
                 "wallet": [
                 {
                     "crypto": "BTC",
-                    "average_price": 110000,
+                    "average_price": 1100.54,
                     "quantity": 200
                 },
                 {
@@ -107,7 +107,7 @@ export async function GET() {
                 },
                 {
                     "crypto": "SOL",
-                    "average_price": 20,
+                    "average_price": 230,
                     "quantity": 2000
                 }
                 ]

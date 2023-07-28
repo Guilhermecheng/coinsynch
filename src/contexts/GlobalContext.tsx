@@ -3,13 +3,6 @@
 import { SetStateAction } from "react";
 import { createContext, Dispatch, ReactNode, useState } from "react";
 
-interface CoinProps {
-    crypto: string;
-    name: string;
-    logo: string;
-    price: number;
-}
-
 interface TopCoinsProps {
     data: {
         id: string;
@@ -27,7 +20,7 @@ interface TopCoinsProps {
     }[]
 }
 
-interface UserDataProps {
+export interface UserDataProps {
     name: string;
     email: string ;
     avatar_img: string;
@@ -36,6 +29,15 @@ interface UserDataProps {
         average_price: number;
         quantity: number;
     }[];
+}
+
+export interface WalletProps {
+    crypto: string;
+    assetName: string;
+    average_price: number;
+    updatedPrice: number;
+    quantity: number;
+    logo: string;
 }
 
 interface GlobalContextProps {
@@ -47,11 +49,11 @@ interface GlobalContextProps {
     userData: UserDataProps | null;
     setUserData: Dispatch<SetStateAction<UserDataProps | null>>;
 
-    topCryptos: CoinProps[];
-    setTopCryptos: Dispatch<SetStateAction<CoinProps[]>>;
-
     topAssets: TopCoinsProps | null;
     setTopAssets: Dispatch<SetStateAction<TopCoinsProps | null>>;
+
+    walletUpdated: WalletProps[],
+    setWalletUpdated: Dispatch<SetStateAction<WalletProps[]>>,
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -64,11 +66,11 @@ export const GlobalContext = createContext<GlobalContextProps>({
     userData: null,
     setUserData: () => {},
 
-    topCryptos:  [],
-    setTopCryptos: () => {},
-
     topAssets: null,
     setTopAssets: () => {},
+
+    walletUpdated: [],
+    setWalletUpdated: () => {},
 });
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
@@ -76,9 +78,8 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
     const [isVertMenuOpen, setIsVertMenuOpen] = useState(false);
 
     const [userData, setUserData] = useState<UserDataProps | null>(null);
-    const [topCryptos, setTopCryptos] = useState<CoinProps[]>([]);
     const [topAssets, setTopAssets] = useState<TopCoinsProps | null>(null);
-
+    const [walletUpdated, setWalletUpdated] = useState<WalletProps[]>([]);
 
     return (
         <GlobalContext.Provider value={{ 
@@ -91,11 +92,11 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             userData, 
             setUserData,
 
-            topCryptos,
-            setTopCryptos,
-
             topAssets, 
-            setTopAssets
+            setTopAssets,
+
+            walletUpdated, 
+            setWalletUpdated
          }}>
             {children}
         </GlobalContext.Provider>
