@@ -103,7 +103,7 @@ export function Wallet() {
     return(
         <div 
             id="wallet"
-            className=" text-basecolor flex flex-col items-center justify-center mx-6 sm:mx-14 lg:mx-16 py-6 sm:py-10 lg:py-14 border-t-2 border-secondary-300"
+            className=" text-basecolor flex flex-col items-center justify-center mx-6 sm:mx-14 lg:mx-16 py-6 sm:py-10 lg:py-14 border-t-2 border-secondary-300 z-10"
         >
             <div className='w-full sm:p-6 sm:bg-white sm:rounded-lg sm:shadow-lg'>
 
@@ -134,12 +134,16 @@ export function Wallet() {
                             return (
                                 <li key={i} className="bg-white  w-full rounded-lg flex flex-col">
                                     <h1 className='w-full align-center text-xs px-5 py-4 bg-primary-100 rounded-t-lg'>
-                                        {walletItem.crypto}
+                                        <div className='flex items-center w-full h-full'>
+                                            <img src={walletItem.logo} className="h-[32px]" alt={walletItem.crypto} />
+                                            <span className='ml-2'>{walletItem.assetName}</span>
+                                            <span className='ml-1'>{walletItem.crypto}</span>
+                                        </div>
                                     </h1>
 
                                     <div className='p-4'>
                                         <h3 className='text-xs text-secondary-500'>Holdings</h3>
-                                        <h3 className='text-basecolor text-sm mt-1'>{ holding.toLocaleString("en-IN", { style: "currency", currency: "USD" })  }</h3>
+                                        <h3 className='text-basecolor text-sm mt-1'>{ holding.toLocaleString("en-US", { style: "currency", currency: "USD" })  }</h3>
                                         <span className='text-xs text-primary-500 mt-1'>{ walletItem.quantity } BTC</span>
                                     </div>
 
@@ -201,7 +205,7 @@ export function Wallet() {
                                                         </div>
                                                     </td>
                                                     <td className="text-center flex flex-col px-6 py-4 whitespace-nowrap">
-                                                        { holding.toLocaleString("en-IN", { style: "currency", currency: "USD" }) }
+                                                        { holding.toLocaleString("en-US", { style: "currency", currency: "USD" }) }
                                                         <span className='text-xs text-primary-500'>{ walletItem.quantity } <span>{walletItem.crypto}</span></span>
                                                     </td>
                                                     <td className="text-center px-6 py-4 whitespace-nowrap">

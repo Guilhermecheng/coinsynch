@@ -19,11 +19,9 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
     const { setUserData, userData, walletUpdated, setWalletUpdated } = useContext(GlobalContext);
 
     async function addCrypto(data: FieldValues) {
-        console.log("tentando")
 
         const crypto = cryptoList.find(as => as.crypto === data.crypto);
         if(crypto) {
-            console.log("tentando")
             let newQty = Number(data.quantity);
             
             const response = await axios.get(`https://api.coincap.io/v2/assets/${crypto.id}`);
@@ -68,7 +66,6 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                 setWalletUpdated(wallet);
                 setModalState(false);
             }
-            console.log(userData)
         }
     }
 

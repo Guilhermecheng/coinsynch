@@ -37,7 +37,7 @@ export function CoinCarousel() {
                     return(
                         <li key={i} className='flex gap-x-2 '>
                             <span>{asset.symbol}</span>
-                            <span>{price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}</span>
+                            <span>{price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
                             <span className={`whitespace-nowrap ${change > 0 ? "text-tertiary-700" : "text-quartenary-700"}`}>{`${change.toFixed(2)} %`}</span>
                         </li>
                     )

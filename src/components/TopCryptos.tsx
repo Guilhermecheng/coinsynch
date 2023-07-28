@@ -54,7 +54,7 @@ export function TopCryptos() {
                                 <Accordion.Content className='p-4 border-t-2 border-secondary-200'>
                                         <div className='flex justify-between items-center'>
                                             <h3 className='text-xs'>Price</h3>
-                                            <span className='text-sm text-basecolor'>{price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}</span>
+                                            <span className='text-sm text-basecolor'>{price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</span>
                                         </div>
                                         <div className='flex justify-between items-center mt-2'>
                                             <h3 className='text-xs'>Change</h3>
@@ -94,7 +94,7 @@ export function TopCryptos() {
                                     </td>
 
                                     <td className='px-14 lg:px-22 py-5 align-center'>
-                                        {price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}
+                                        {price.toLocaleString("en-US", { style: "currency", currency: "USD" })}
                                     </td>
                                     <td className={`px-14 lg:px-22 py-5 align-center whitespace-nowrap ${change > 0 ? "text-tertiary-700" : "text-quartenary-700"}`}>{`${change.toFixed(2)} %`}</td>
                                     <td className='px-14 lg:px-22 py-5 align-center'>

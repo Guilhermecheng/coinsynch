@@ -30,7 +30,8 @@ interface TransferCryptoProps {
 }
 
 export function TransferCrypto({ setModalState, selectedCrypto }: TransferCryptoProps) {
-    const { setUserData, userData } = useContext(GlobalContext);
+    const { setUserData, userData, walletUpdated, setWalletUpdated } = useContext(GlobalContext);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [youRTransfering, setYouRTransfering] = useState<CoinProps>({
         crypto: "",
@@ -72,31 +73,45 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
         let newQty = Number(data.quantity);
 
 
-        if(userData) {
+        if(userData && walletUpdated) {
             let newData = userData;
-            let coinIndex = newData.wallet.findIndex(item => item.crypto === selectedCrypto.crypto);
-            if(coinIndex >= 0) {
-                let coin = newData.wallet[coinIndex];
+            let wallet = walletUpdated;
+
+            let coinIndexUser = newData.wallet.findIndex(item => item.crypto === selectedCrypto.crypto);
+            let coinIndexWallet = wallet.findIndex(item => item.crypto === selectedCrypto.crypto);
+
+            if(coinIndexUser >= 0) {
+                let coin = newData.wallet[coinIndexUser];
 
                 if(data.transferType === "out") {
                     if(newQty == coin.quantity) {
-                        console.log("removinng")
-                        newData.wallet.splice(coinIndex, 1);
+                        console.log("removing")
+                        newData.wallet.splice(coinIndexUser, 1);
+                        wallet.splice(coinIndexWallet, 1);
+
                         setUserData(newData);
+                        setWalletUpdated(wallet);
                         setModalState(false);
     
                     } else if (newQty < coin.quantity) {
                         let sum = coin.quantity - newQty;
-                        newData.wallet[coinIndex].quantity = sum;
+
+                        newData.wallet[coinIndexUser].quantity = sum;
+                        wallet[coinIndexWallet].quantity = sum;
+
                         setUserData(newData);
+                        setWalletUpdated(wallet);
                         setModalState(false);
     
                     }
                     
                 } else if(data.transferType === "in") {
                     let sum = coin.quantity + newQty;
-                    newData.wallet[coinIndex].quantity = sum;
+                    newData.wallet[coinIndexUser].quantity = sum;
+                    wallet[coinIndexWallet].quantity = sum;
+
                     setUserData(newData);
+                    setWalletUpdated(wallet);
                     setModalState(false);
                 }
             }
