@@ -9,7 +9,7 @@ export function Solutions() {
     const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
 
     return (
-        <div className='w-full flex flex-col items-center bg-linear-gradient pt-14 pb-6'>
+        <div className='w-full flex flex-col items-center bg-linear-gradient py-14 sm:py-20 lg:py-40'>
             <div id="solutions-title" className="px-6 lg:hidden">
                 <h1 className='text-primary-500 text-base sm:text-lg font-bold'>Lorem Ipsum</h1>
                 <h1 className='text-basecolor text-2xl sm:text-2xl font-bold'>Lorem Ipsum</h1>
@@ -45,7 +45,7 @@ export function Solutions() {
                         </div>
                     </div>
 
-                    <div className='flex w-full justify-center gap-x-8 ml-12 bg-linear-gradient'>
+                    <div className='flex w-full justify-center gap-x-8 ml-12'>
                         <div className='w-[280px] p-6 shadow-2xl rounded-md'>
                             <img src="/charts.svg" className='h-10 sm:h-16' alt="Lorem" />
                             <h3 className='text-primary-500 text-sm sm:text-base mt-4 font-bold'>For your company</h3>

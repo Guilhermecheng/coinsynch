@@ -62,13 +62,13 @@ export function Header() {
                         <DropdownMenu.Portal>
                             <DropdownMenu.Content className="bg-white shadow-xl py-4 px-4 rounded flex flex-col items-center justify-center gap-y-4 border-2 border-secondary-300" sideOffset={10}>
                                 <DropdownMenu.Item className="outline-none cursor-pointer text-basecolor" onClick={logout}>
-                                    <Dialog.Trigger asChild aria-controls="modal-content"  onClick={() => setModalType("signin")}>
+                                    <Dialog.Trigger asChild aria-controls="modal-content" id="header-signin-mobile" onClick={() => setModalType("signin")}>
                                         <span className="cursor-pointer">Sign In</span>
                                     </Dialog.Trigger>
                                 </DropdownMenu.Item>
                                 <DropdownMenu.Separator className="h-[1px] w-full bg-secondary-300" />
                                 <DropdownMenu.Item className="outline-none cursor-pointer text-primary-500" onClick={logout}>
-                                    <Dialog.Trigger asChild aria-controls="modal-content" onClick={() => setModalType("signup")}>
+                                    <Dialog.Trigger asChild aria-controls="modal-content" id="header-signup-mobile" onClick={() => setModalType("signup")}>
                                         <span className="cursor-pointer">Sign up</span>
                                     </Dialog.Trigger>
                                 </DropdownMenu.Item>
