@@ -1,32 +1,66 @@
 export const cryptoList = [
   {
+    id:"bitcoin",
     crypto: "BTC",
     name: "Bitcoin",
     logo: "/bitcoin.svg",
     price: 0,
   },
   {
+    id:"ethereum",
     crypto: "ETH",
     name: "Ethereum",
     logo: "/ethereum.svg",
     price: 0,
   },
   {
+    id: "tether",
+    crypto: "USDT",
+    name: "Tether",
+    logo: "/tether.svg",
+    price: 0,
+  },
+  {
+    id: "cardano",
     crypto: "ADA",
     name: "Cardano",
     logo: "/cardano.svg",
     price: 0,
   },
   {
+    id: "solana",
     crypto: "SOL",
     name: "Solana",
     logo: "/solana.svg",
     price: 0,
   },
-  // {
-  //   crypto: "USDC",
-  //   name: "USD Coin",
-  //   logo: "/usdcoin.svg",
-  //   price: 0,
-  // },
+  {
+    id: "binance-coin",
+    rank: "4",
+    crypto: "BNB",
+    name: "BNB",
+    logo: "/bnb.svg",
+    price: 0,
+  },
+  {
+    id: "usd-coin",
+    crypto: "USDC",
+    name: "USD Coin",
+    logo: "/usdcoin.svg",
+    price: 0,
+  },
+  {
+    id: "xrp",
+    crypto: "XRP",
+    name: "XRP",
+    logo: "/xrp.svg",
+    price: 0,
+  },
+  {
+    id: "dogecoin",
+    crypto: "DOGE",
+    name: "Dogecoin",
+    logo: "/doge.svg",
+    price: 0,
+  }
 ];

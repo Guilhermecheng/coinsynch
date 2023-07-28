@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, redirect } from "next/navigation";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -14,14 +14,13 @@ import axios from "axios";
 
 export function Header() {
     const pathname = usePathname();
-    const router = useRouter();
 
     const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
     const [mobileLoginMenu, setMobileLoginMenu] = useState(false);
 
     function logout() {
         setUserData(null);
-        router.push("/");
+        redirect("/");
     }
 
     useEffect(() => {

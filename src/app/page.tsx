@@ -14,7 +14,7 @@ import axios from 'axios';
 import { cryptoList } from '@/lib/utils';
 
 export default function Home() {
-  const { setModalType, topCryptos, topAssets, setTopAssets } = useContext(GlobalContext);
+  const { setTopAssets } = useContext(GlobalContext);
 
     useEffect(() => {
       async function getTopAssets() {

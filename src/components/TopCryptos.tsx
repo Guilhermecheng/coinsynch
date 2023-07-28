@@ -18,7 +18,9 @@ export function TopCryptos() {
 
     if(topAssets === null) {
         return (
-            <>Loading..</>
+            <div className='flex flex-col items-center justify-center h-20 text-basecolor'>
+                Loading..
+            </div>
         )
     }
 
@@ -82,18 +84,20 @@ export function TopCryptos() {
 
                             return (
                                 <tr key={i} className='text-base text-basecolor'>
-                                    <td className='px-14 lg:px-22 py-5'>{asset.rank}</td>
+                                    <td className='px-14 lg:px-22 py-5 align-center'>{asset.rank}</td>
 
-                                    <td className='px-14 lg:px-22 py-5 flex items-center'>
+                                    <td className='px-14 lg:px-22 py-5  align-center'>
                                         {/* <img src={asset.logo} className='h-8 mr-4' alt={crypto.crypto} /> */}
-                                        {asset.name} <span className='text-secondary-500 ml-2'>{asset.symbol}</span>
+                                        <div className='flex items-center whitespace-nowrap'>
+                                            {asset.name} <span className='text-secondary-500 ml-2 align-center'>{asset.symbol}</span>
+                                        </div>
                                     </td>
 
-                                    <td className='px-14 lg:px-22 py-5'>
+                                    <td className='px-14 lg:px-22 py-5 align-center'>
                                         {price.toLocaleString("en-IN", { style: "currency", currency: "USD" })}
                                     </td>
-                                    <td className={`px-14 lg:px-22 py-5 whitespace-nowrap ${change > 0 ? "text-tertiary-700" : "text-quartenary-700"}`}>{`${change.toFixed(2)} %`}</td>
-                                    <td className='px-14 lg:px-22 py-5'>
+                                    <td className={`px-14 lg:px-22 py-5 align-center whitespace-nowrap ${change > 0 ? "text-tertiary-700" : "text-quartenary-700"}`}>{`${change.toFixed(2)} %`}</td>
+                                    <td className='px-14 lg:px-22 py-5 align-center'>
                                         <button className='py-2 px-8 bg-tertiary-700 text-white rounded-full cursor-pointer'>Buy</button>
                                     </td>
                                 </tr>
