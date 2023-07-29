@@ -21,10 +21,10 @@ export function Newsletter() {
     });
 
     async function subscribe(data: FieldValues) {
-        console.log(data)
         const response = await axios.post("/api/newsletter", {
             email: data.newsletter,
         });
+
         if(response.status === 200) {
             toast.success(response.data.message, {
                 position: "top-center",
@@ -74,7 +74,6 @@ export function Newsletter() {
                         className="mt-2 mb-4 sm:mb-5 w-full text-sm sm:text-base text-basecolor rounded-xl h-10 sm:h-12 px-4 shadow-xl outline-primary-500"
                         disabled={isSubmitting}
                         {...register("newsletter", { required: true })}
-
                     />
                     
                     <button 

@@ -19,8 +19,8 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
     const { setUserData, userData, walletUpdated, setWalletUpdated, setTotalBalance } = useContext(GlobalContext);
 
     async function addCrypto(data: FieldValues) {
-
         const crypto = cryptoList.find(as => as.crypto === data.crypto);
+
         if(crypto) {
             let newQty = Number(data.quantity);
             

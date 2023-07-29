@@ -3,8 +3,6 @@
 import { GlobalContext } from "@/contexts/GlobalContext";
 import { useContext } from "react";
 
-
-
 export function VerticalMenu() {
     const { isVertMenuOpen, setIsVertMenuOpen } = useContext(GlobalContext);
 

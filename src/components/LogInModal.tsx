@@ -19,12 +19,11 @@ export function LogInModal() {
     const router = useRouter();
 
     async function login(data: FieldValues) {
-        // const response = await axios.get("http://localhost:8080/users");
         const response = await axios.get("/api/users");
+
         if(response) {
-            console.log(response.data);
             var found = response.data.find((e:any) => e.email === data.email);
-            console.log(found);
+
             if(found) {
                 setUserData(found);
                 router.push("/dashboard");
@@ -94,11 +93,8 @@ export function LogInModal() {
                         </form>
                     )}
 
-                    
-
                     <div className="mt-6">
                         {modalType  === "signin" ? (
-                            
                             <span>Don't have an account? <span className="font-bold cursor-pointer" onClick={() => setModalType("signup")}>Sign up to <span className="text-primary-500">Coin</span><span className="text-secondary-500">Synch</span></span></span>
                         ) : (
                             <span>Already have an account? <span className="font-bold cursor-pointer" onClick={() => setModalType("signin")}>Sign in to <span className="text-primary-500">Coin</span><span className="text-secondary-500">Synch</span></span></span>

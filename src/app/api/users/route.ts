@@ -18,7 +18,7 @@ export async function GET() {
                     "quantity": 1000
                 },
                 {
-                    "crypto": "SOL",
+                    "crypto": "DOGE",
                     "average_price": 15.4,
                     "quantity": 5000
                 }
@@ -30,7 +30,7 @@ export async function GET() {
                 "avatar_img": "https://github.com/Guilhermecheng.png",
                 "wallet": [
                 {
-                    "crypto": "BTC",
+                    "crypto": "DOGE",
                     "average_price": 12000,
                     "quantity": 500
                 },
@@ -79,7 +79,7 @@ export async function GET() {
                     "quantity": 600
                 },
                 {
-                    "crypto": "ETH",
+                    "crypto": "XRP",
                     "average_price": 4100,
                     "quantity": 900
                 },
@@ -197,6 +197,11 @@ export async function GET() {
                     "crypto": "USDC",
                     "average_price": 8,
                     "quantity": 3000
+                },
+                {
+                    "crypto": "BNB",
+                    "average_price": 8,
+                    "quantity": 3000
                 }
                 ]
             },
@@ -216,11 +221,17 @@ export async function GET() {
                     "quantity": 500
                 },
                 {
-                    "crypto": "ADA",
+                    "crypto": "SOL",
                     "average_price": 50,
                     "quantity": 2000
                 }
                 ]
+            },
+            {
+                "name": "Ronald",
+                "email": "ronald@example.com",
+                "avatar_img": "https://github.com/Guilhermecheng.png",
+                "wallet": []
             }
         ]
     )

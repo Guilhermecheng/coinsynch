@@ -51,7 +51,6 @@ export function Carousel() {
                         <img src="/carousel3.png" alt="Lorem the Ipsum!" /> 
                     </ReactCarousel>
             </div>
-            
 
             <div className=" w-full bg-[url('/wave.png')] h-[200px] lg:h-[499px] bg-cover bg-top bg-no-repeat"></div>
         </section>

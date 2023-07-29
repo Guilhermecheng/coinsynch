@@ -37,7 +37,6 @@ export function TopCryptos() {
 
                 <Accordion.Root type='single' collapsible className="md:hidden w-full text-secondary-500 [&>*:nth-child(odd)]:bg-white [&>*:nth-child(even)]:bg-secondary-100">
                     { topAssets.data.slice(0,viewMore).map((asset, i) => {
-                        // let change = (Math.random() * 2 - 1) * 10;
                         let price = Number(asset.priceUsd);
                         let change = Number(asset.changePercent24Hr)
 

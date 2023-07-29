@@ -69,9 +69,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
     }
 
     function transferCrypto(data: FieldValues) {
-        console.log(data, selectedCrypto)
         let newQty = Number(data.quantity);
-
 
         if(userData && walletUpdated) {
             let newData = userData;
@@ -85,7 +83,6 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
 
                 if(data.transferType === "out") {
                     if(newQty == coin.quantity) {
-                        console.log("removing")
                         newData.wallet.splice(coinIndexUser, 1);
                         wallet.splice(coinIndexWallet, 1);
 
@@ -102,16 +99,13 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                         setUserData(newData);
                         setWalletUpdated(wallet);
                         setModalState(false);
-    
                     }
                     
                 } else if(data.transferType === "in") {
                     let sum = coin.quantity + newQty;
                     newData.wallet[coinIndexUser].quantity = sum;
                     wallet[coinIndexWallet].quantity = sum;
-
                     
-
                     setUserData(newData);
                     setWalletUpdated(wallet);
                     setModalState(false);
@@ -124,9 +118,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
             })
             setTotalBalance(updateTotalBalance);
         }
-
     }
-    
 
     return (
         <Dialog.Portal>

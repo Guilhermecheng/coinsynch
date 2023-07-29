@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Header } from "@/components/Header";
@@ -11,7 +11,6 @@ import { Solutions } from '@/components/Solutions';
 import { TopCryptos } from '@/components/TopCryptos';
 import { Newsletter } from '@/components/Newsletter';
 import axios from 'axios';
-import { cryptoList } from '@/lib/utils';
 
 export default function Home() {
   const { setTopAssets } = useContext(GlobalContext);
@@ -19,7 +18,6 @@ export default function Home() {
     useEffect(() => {
       async function getTopAssets() {
         const response = await axios.get(`https://api.coincap.io/v2/assets`);
-        console.log(response)
         setTopAssets(response.data);
       }
       getTopAssets();
@@ -32,7 +30,6 @@ export default function Home() {
 
         <Carousel />
         <Solutions />
-
 
         <LogInModal />
       </Dialog.Root>

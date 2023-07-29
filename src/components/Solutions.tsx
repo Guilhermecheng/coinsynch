@@ -6,7 +6,7 @@ import { GlobalContext } from '@/contexts/GlobalContext';
 import { Cards } from './Cards';
 
 export function Solutions() {
-    const { setModalType, isVertMenuOpen, setIsVertMenuOpen, setUserData, userData } = useContext(GlobalContext);
+    const { setModalType } = useContext(GlobalContext);
 
     return (
         <div className='w-full flex flex-col items-center bg-linear-gradient py-14 sm:py-20 lg:py-40'>
@@ -63,7 +63,6 @@ export function Solutions() {
                             </p>
                         </div>
                     </div>
-
                 </div>
 
                 <div id="solutions-title" className="px-6 hidden lg:flex lg:flex-col">

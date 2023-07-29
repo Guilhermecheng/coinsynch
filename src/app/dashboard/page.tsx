@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Footer } from "@/components/Footer";
@@ -27,7 +27,7 @@ export default function Dashboard() {
             
             <div className="h-full sm:h-[calc(100%-116px)] md:h-[calc(100%-128px)] bg-dashback">
                 <VerticalMenu />
-                <div id="dashboard" className="relative md:w-[calc(100%-90px)] h-full md:ml-[90px] overflow-scroll">
+                <div id="dashboard" className="relative md:w-[calc(100%-90px)] h-full md:ml-[90px] overflow-scroll min-h-[85vh]">
                     {isVertMenuOpen && <div className={`absolute w-full h-full inset-0 bg-basecolor opacity-70 border-none z-10`} /> }
 
                     <div id="overview" className="text-basecolor flex flex-col gap-y-4 sm:gap-y-6 lg:flex-row lg:gap-y-0 lg:gap-x-8 w-full items-center justify-center px-6 sm:px-14 lg:px-16 py-6 sm:py-10 lg:py-14">
