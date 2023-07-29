@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# coinsynch
 
-## Getting Started
+Landing page and dashboard of a crypto wallet web app!
 
-First, run the development server:
+<div style="display: flex">
+  <img height="360" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/7e9aa0b2-1b88-44dc-9803-47cd28db7739"/>
+  <img height="360" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/841e4939-2c6e-4bd9-ba67-c9e63db166fa" />
+</div>
+
+
+# Installation and utilization
+
+### Install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Dev mode
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Please feel free to test it, creating an user on the platform, trough "Sign Up", or signing up with one of these users at "Sign In":
 
-## Learn More
+1. John - john@example.com
+2. Alice - alice@example.com
+3. Bob - bob@example.com
+4. Sarah - sarah@example.com
+5. Michael - michael@example.com
+6. Emma - emma@example.com
+7. Daniel - daniel@example.com
+8. Sophia - sophia@example.com
+9. Matthew - matthew@example.com
+10. Isabella - isabella@example.com
+11. Ronald - ronald@example.com
 
-To learn more about Next.js, take a look at the following resources:
+ **PS: any password with minimum of 3 characters can be used**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ # Dashboard and functionality
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Trough the app, you can add and transfer crypto as you like, and your balance will be updated:
 
-## Deploy on Vercel
+<div style="display: flex">
+<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/102217da-9d02-42fb-88aa-0bb4e47483db" height="300" />
+<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/9775b3ee-c7c5-4e50-9b1b-4b111d7a4298" height="300" />
+</div></br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+All user data comes from Next Server, at "/api/users".</br>
+All crypto data comes from Coincap API. Check more at:</br>
+https://docs.coincap.io/
