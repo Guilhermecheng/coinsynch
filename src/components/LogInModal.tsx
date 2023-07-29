@@ -1,7 +1,7 @@
 'use client';
 
 import { GlobalContext, UserDataProps } from "@/contexts/GlobalContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import * as Dialog from "@radix-ui/react-dialog";
@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { RiCloseLine } from "react-icons/ri";
 import { FiCheck } from "react-icons/fi";
+import { AiOutlineEye } from "react-icons/ai";
 
 const signInFormValidation = z.object({
     email: z.string().min(1, { message: "Email is required" }).email({
@@ -45,6 +46,9 @@ type SignUpValidationSchema = z.infer<typeof signUpFormValidation>;
 
 export function LogInModal() {
     const { modalType, setModalType, setUserData } = useContext(GlobalContext);
+    const [logInSeePassword, setlogInSeePassword] = useState(false);
+    const [signUpSeePassword, setSignUpSeePassword] = useState(false);
+    const [signUpSeeConfPassword, setSignUpSeeConfPassword] = useState(false);
 
     const { register: registerSignUp, handleSubmit: handleSubmitSignUp, formState: { errors: errorsSignUp,  }, control } = useForm<SignUpValidationSchema>({
         resolver: zodResolver(signUpFormValidation),
@@ -104,12 +108,15 @@ export function LogInModal() {
                             />
                             {errors.email && <span className="text-xs text-quartenary-500 mt-1">{errors.email?.message}</span>}
 
-                            <input 
-                                type="password" 
-                                placeholder="Password" 
-                                className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mt-3.5 md:mt-6" 
-                                {...register("password", { required: true })}
-                            />
+                            <div className="flex justify-between items-center h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mt-3.5 md:mt-6">
+                                <input 
+                                    type={logInSeePassword ? "text" : "password"}
+                                    placeholder="Password" 
+                                    className="w-[80%]  h-full outline-none" 
+                                    {...register("password", { required: true })}
+                                />
+                                <AiOutlineEye size={24} className="cursor-pointer text-secondary-500" onClick={() => setlogInSeePassword(!logInSeePassword)} />
+                            </div>
                             {errors.password && <span className="text-xs text-quartenary-500 mt-1">{errors.password?.message}</span>}
 
                             <span className="w-full flex justify-end text-xs mt-2 cursor-pointer">Forgot password?</span>
@@ -136,20 +143,26 @@ export function LogInModal() {
                             />
                             {errorsSignUp.email && <span className="text-xs text-quartenary-500 mt-1">{errorsSignUp.email?.message}</span>}
 
-                            <input 
-                                type="password" 
-                                placeholder="Password"
-                                className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4" 
-                                {...registerSignUp("password", { required: true })}
-                            />
+                            <div className="flex justify-between items-center h-12 w-full border-2 border-secondary-300 rounded-xl px-4 ">
+                                <input 
+                                    type={signUpSeePassword ? "text" : "password"}
+                                    placeholder="Password" 
+                                    className="w-[80%]  h-full outline-none" 
+                                    {...registerSignUp("password", { required: true })}
+                                />
+                                <AiOutlineEye size={24} className="cursor-pointer text-secondary-500" onClick={() => setSignUpSeePassword(!signUpSeePassword)} />
+                            </div>
                             {errorsSignUp.password && <span className="text-xs text-quartenary-500 mt-1">{errorsSignUp.password?.message}</span>}
-
-                            <input 
-                                type="password" 
-                                placeholder="Confirm Password" 
-                                className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4"
-                                {...registerSignUp("confirmPassword", { required: true })}
-                            />
+                            
+                            <div className="flex justify-between items-center h-12 w-full border-2 border-secondary-300 rounded-xl px-4">
+                                <input 
+                                    type={signUpSeeConfPassword ? "text" : "password"}
+                                    placeholder="Confirm Password" 
+                                    className="w-[80%]  h-full outline-none" 
+                                    {...registerSignUp("confirmPassword", { required: true })}
+                                />
+                                <AiOutlineEye size={24} className="cursor-pointer text-secondary-500" onClick={() => setSignUpSeeConfPassword(!signUpSeeConfPassword)} />
+                            </div>
                             {errorsSignUp.confirmPassword && <span className="text-xs text-quartenary-500 mt-1">{errorsSignUp.confirmPassword?.message}</span>}
 
                             <span className="w-full flex text-xs mt-2 cursor-pointer">
