@@ -29,7 +29,6 @@ export interface UserDataProps {
         average_price: number;
         quantity: number;
     }[];
-    total: number;
 }
 
 export interface WalletProps {

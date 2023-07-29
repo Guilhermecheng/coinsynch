@@ -32,7 +32,9 @@ const signUpFormValidation = z.object({
     
     password: z.string().min(3, { message: "A valid is password required" }),
     confirmPassword: z.string().min(3, { message: "A valid password is required" }),
-    policy: z.preprocess(value => value === 'on', z.boolean(), { required_error: "Please accept our terms to continue"})
+    policy: z.literal(true, {
+      errorMap: () => ({ message: "You must accept the terms and conditions" }),
+    }),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: "Passwords don't match",
@@ -67,8 +69,16 @@ export function LogInModal() {
         }
     }
 
-    function signup() {
-        console.log("registering")
+    function signup(data: FieldValues) {
+        console.log(data)
+        setUserData({
+            name: data.name as string,
+            email: data.email,
+            avatar_img: "https://github.com/Guilhermecheng.png",
+            wallet: []
+        })
+
+        router.push("/dashboard");
     }
 
     return(
@@ -145,10 +155,15 @@ export function LogInModal() {
                             <span className="w-full flex text-xs mt-2 cursor-pointer">
                             <Controller
                                 control={control}
-                                {...registerSignUp("policy", { required: true })}
+                                rules={{ required: true }}
+                                name="policy"
                                 render={({ field }) => (
                                     <Checkbox.Root 
                                         className="w-[20px] h-[20px] bg-white border-2 border-primary-500 rounded mr-2" id="c1"
+                                        {...field}
+                                        value={undefined}
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
                                     >
                                         <Checkbox.Indicator className="flex items-center justify-center">
                                             <FiCheck size={12} />
@@ -158,7 +173,7 @@ export function LogInModal() {
                             />
                                 <label htmlFor="c1">I've read and accepted the <span className="font-bold">Privacy Policy</span> and <span className="font-bold">Terms of User Sign up.</span></label>
                             </span> 
-                            {errorsSignUp.policy && <span className="text-xs text-quartenary-500 mt-1">{errorsSignUp.policy?.message}</span>}
+                            {errorsSignUp.policy && <span className="text-xs text-quartenary-500">{errorsSignUp.policy?.message}</span>}
 
                             <button type="submit" className="mt-3.5 md:mt-6 flex items-center justify-center w-full bg-primary-500 text-white rounded-full py-3.5">
                                Sign Up
