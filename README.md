@@ -3,8 +3,8 @@
 Landing page and dashboard of a crypto wallet web app!
 
 <div style="display: flex">
-  <img height="360" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/7e9aa0b2-1b88-44dc-9803-47cd28db7739"/>
-  <img height="360" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/841e4939-2c6e-4bd9-ba67-c9e63db166fa" />
+  <img height="280" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/7e9aa0b2-1b88-44dc-9803-47cd28db7739"/>
+  <img height="280" alt="image" src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/841e4939-2c6e-4bd9-ba67-c9e63db166fa" />
 </div>
 
 
@@ -44,8 +44,8 @@ Please feel free to test it, creating an user on the platform, trough "Sign Up",
 Trough the app, you can add and transfer crypto as you like, and your balance will be updated:
 
 <div style="display: flex">
-<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/102217da-9d02-42fb-88aa-0bb4e47483db" height="300" />
-<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/9775b3ee-c7c5-4e50-9b1b-4b111d7a4298" height="300" />
+<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/102217da-9d02-42fb-88aa-0bb4e47483db" height="220" />
+<img src="https://github.com/Guilhermecheng/coinsynch/assets/62719629/9775b3ee-c7c5-4e50-9b1b-4b111d7a4298" height="220" />
 </div></br>
 
 All user data comes from Next Server, at "/api/users".</br>
