@@ -15,7 +15,7 @@ interface AddCryptoProps {
 
 export function AddCrypto({ setModalState }: AddCryptoProps) {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { setUserData, userData, walletUpdated, setWalletUpdated, setTotalBalance } = useContext(GlobalContext);
 
     async function addCrypto(data: FieldValues) {
@@ -46,6 +46,7 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                     setUserData(userCryptos);
                     setWalletUpdated(wallet);
                     setModalState(false);
+                    reset();
                 } else {
                     userCryptos.wallet.push({
                         crypto: data.crypto as string,
@@ -65,6 +66,7 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                 setUserData(userCryptos);
                 setWalletUpdated(wallet);
                 setModalState(false);
+                reset();
 
                 let updateTotalBalance = 0;
                 wallet.forEach(item => {

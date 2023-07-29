@@ -32,7 +32,7 @@ interface TransferCryptoProps {
 export function TransferCrypto({ setModalState, selectedCrypto }: TransferCryptoProps) {
     const { setUserData, userData, walletUpdated, setWalletUpdated, setTotalBalance } = useContext(GlobalContext);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [youRTransfering, setYouRTransfering] = useState<CoinProps>({
         crypto: "",
         name: "",
@@ -89,6 +89,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                         setUserData(newData);
                         setWalletUpdated(wallet);
                         setModalState(false);
+                        reset();
     
                     } else if (newQty < coin.quantity) {
                         let sum = coin.quantity - newQty;
@@ -99,6 +100,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                         setUserData(newData);
                         setWalletUpdated(wallet);
                         setModalState(false);
+                        reset();
                     }
                     
                 } else if(data.transferType === "in") {
@@ -109,6 +111,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                     setUserData(newData);
                     setWalletUpdated(wallet);
                     setModalState(false);
+                    reset();
                 }
             }
 
