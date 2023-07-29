@@ -30,7 +30,7 @@ interface TransferCryptoProps {
 }
 
 export function TransferCrypto({ setModalState, selectedCrypto }: TransferCryptoProps) {
-    const { setUserData, userData, walletUpdated, setWalletUpdated } = useContext(GlobalContext);
+    const { setUserData, userData, walletUpdated, setWalletUpdated, setTotalBalance } = useContext(GlobalContext);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [youRTransfering, setYouRTransfering] = useState<CoinProps>({
@@ -110,11 +110,19 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                     newData.wallet[coinIndexUser].quantity = sum;
                     wallet[coinIndexWallet].quantity = sum;
 
+                    
+
                     setUserData(newData);
                     setWalletUpdated(wallet);
                     setModalState(false);
                 }
             }
+
+            let updateTotalBalance = 0;
+            wallet.forEach(item => {
+                updateTotalBalance += item.quantity * item.updatedPrice
+            })
+            setTotalBalance(updateTotalBalance);
         }
 
     }
@@ -156,6 +164,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                             id="transf-qty"
                             type="number" 
                             placeholder="0.00" 
+                            step="0.000001"
                             className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 outline-none text-secondary-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             {...register("quantity", { 
                                 required: true,

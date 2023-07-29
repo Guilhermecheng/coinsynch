@@ -16,7 +16,7 @@ interface AddCryptoProps {
 export function AddCrypto({ setModalState }: AddCryptoProps) {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { setUserData, userData, walletUpdated, setWalletUpdated } = useContext(GlobalContext);
+    const { setUserData, userData, walletUpdated, setWalletUpdated, setTotalBalance } = useContext(GlobalContext);
 
     async function addCrypto(data: FieldValues) {
 
@@ -65,6 +65,12 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                 setUserData(userCryptos);
                 setWalletUpdated(wallet);
                 setModalState(false);
+
+                let updateTotalBalance = 0;
+                wallet.forEach(item => {
+                    updateTotalBalance += item.quantity * item.updatedPrice
+                })
+                setTotalBalance(updateTotalBalance);
             }
         }
     }
@@ -100,6 +106,7 @@ export function AddCrypto({ setModalState }: AddCryptoProps) {
                     <input 
                         type="number" 
                         placeholder="Quantity" 
+                        step="0.000001"
                         className="h-12 w-full border-2 border-secondary-300 rounded-xl px-4 mt-3.5 md:mt-6 outline-none[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         {...register("quantity", { required: true })}
                     />

@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { GlobalContext } from "@/contexts/GlobalContext";
 import { VerticalMenu } from "@/components/VerticalMenu";
 import { Wallet } from "@/components/Wallet";
+import { Balance } from '@/components/Balance';
 
 
 export default function Dashboard() {
@@ -26,7 +27,6 @@ export default function Dashboard() {
             
             <div className="h-full sm:h-[calc(100%-116px)] md:h-[calc(100%-128px)] bg-dashback">
                 <VerticalMenu />
-
                 <div id="dashboard" className="relative md:w-[calc(100%-90px)] h-full md:ml-[90px] overflow-scroll">
                     {isVertMenuOpen && <div className={`absolute w-full h-full inset-0 bg-basecolor opacity-70 border-none z-10`} /> }
 
@@ -40,7 +40,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div className="flex items-center justify-center bg-primary-100 rounded-r-lg">
-                                <h1 className="font-bold text-base sm:text-2xl lg:text-3xl">US$32,256.56</h1>
+                                    <Balance />
                             </div>
                         </div>
 

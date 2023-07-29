@@ -29,6 +29,7 @@ export interface UserDataProps {
         average_price: number;
         quantity: number;
     }[];
+    total: number;
 }
 
 export interface WalletProps {
@@ -54,6 +55,9 @@ interface GlobalContextProps {
 
     walletUpdated: WalletProps[],
     setWalletUpdated: Dispatch<SetStateAction<WalletProps[]>>,
+
+    totalBalance: number;
+    setTotalBalance: Dispatch<SetStateAction<number>>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -71,6 +75,9 @@ export const GlobalContext = createContext<GlobalContextProps>({
 
     walletUpdated: [],
     setWalletUpdated: () => {},
+
+    totalBalance: 0,
+    setTotalBalance: () => {},
 });
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
@@ -80,6 +87,7 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
     const [userData, setUserData] = useState<UserDataProps | null>(null);
     const [topAssets, setTopAssets] = useState<TopCoinsProps | null>(null);
     const [walletUpdated, setWalletUpdated] = useState<WalletProps[]>([]);
+    const [totalBalance, setTotalBalance] = useState<number>(0);
 
     return (
         <GlobalContext.Provider value={{ 
@@ -96,7 +104,10 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             setTopAssets,
 
             walletUpdated, 
-            setWalletUpdated
+            setWalletUpdated,
+
+            totalBalance, 
+            setTotalBalance
          }}>
             {children}
         </GlobalContext.Provider>
