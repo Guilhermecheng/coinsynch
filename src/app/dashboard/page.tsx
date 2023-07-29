@@ -36,7 +36,7 @@ export default function Dashboard() {
                                 <img src="/balance.svg" className="w-8 sm:w-12 lg:w-16" alt="Balance" />
                                 <div className="flex flex-col ml-2 lg:ml-4">
                                     <h1 className="text-sm sm:text-xl lg:text-2xl">Balance</h1>
-                                    <span className="text-secondary-500 text-xs lg:text-base">in US$</span>
+                                    <span className="text-secondary-500 text-xs lg:text-base">in USD</span>
                                 </div>
                             </div>
                             <div className="flex items-center justify-center bg-primary-100 rounded-r-lg">
@@ -46,14 +46,20 @@ export default function Dashboard() {
 
                         <div className="flex w-full lg:max-w-[592px] gap-x-4 sm:gap-x-8">
                             <div id="daily-graphic" className="block w-full sm:flex lg:h-[112px] rounded-lg shadow-xl bg-white">
-                                <div className="px-4 py-2 sm:w-[30%]">
-                                    <h3>Daily Variation</h3>
-                                    <span>Ethereum</span>
-                                    <span>+5,65%</span>
+                                <div className="px-4 py-2 sm:w-[35%]">
+                                    <h3 className='text-xs text-secondary-500'>Daily Variation</h3>
+                                    <div className='flex mt-2 sm:flex-col items-center sm:items-start w-full justify-between'>
+                                        <div className='flex items-center'>
+                                            <img src="/ethereum.svg" alt="ETH" />
+                                            <span className='text-xs text-basecolor ml-2'>ETH</span>
+                                        </div>
+                                        <span className='text-sm text-tertiary-700 sm:mt-2'>+5,65%</span>
+                                    </div>
                                 </div>
 
-                                <div className="sm:w-[70%]">
-                                    Grafico
+                                {/* <img src="/graph.png" alt="Graph" className="sm:w-[65%]" /> */}
+                                <div className="bg-[url('/graph.png')] bg-cover bg-center bg-no-repeat h-[80px] sm:w-[65%] sm:h-full w-full rounded-b-lg sm:rounded-l-none sm:rounded-r-lg">
+                                    <span></span>
                                 </div>
                             </div>
 

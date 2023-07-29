@@ -31,7 +31,7 @@ export function Header() {
                 <div className="flex w-full items-center justify-between h-14 sm:h-[60px] md:h-16 max-w-[1264px] px-12">
                     <img src="/coinsynch.png" className="w-[124px]" alt="Coinsynch logo" />
                     
-                    <div className="hidden md:flex">
+                    <div className="hidden md:flex gap-x-6">
                         <span>About us</span>
                         <span>Top Cryptos</span>
                     </div>
