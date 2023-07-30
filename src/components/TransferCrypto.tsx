@@ -136,7 +136,7 @@ export function TransferCrypto({ setModalState, selectedCrypto }: TransferCrypto
                     <div className='flex w-full items-center justify-center text-sm gap-x-6 pt-6 border-t-2 border-secondary-200'>
                         <h3 className='text-secondary-400'>You are transfering</h3>
                         <div className='flex items-center justify-center text-base'>
-                            <img src={youRTransfering.logo} alt={youRTransfering.crypto} />
+                            <img src={youRTransfering.logo} alt={youRTransfering.crypto} className='h-4' />
                             <span className='text-secondary-500 ml-2'>{youRTransfering.name} {youRTransfering.crypto}</span>
                         </div>
                     </div>

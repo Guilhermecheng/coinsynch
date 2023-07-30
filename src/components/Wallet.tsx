@@ -30,13 +30,13 @@ export function Wallet() {
 
     const [addCryptoModal, setAddCryptoModal] = useState(false);
     const [transferCryptoModal, setTransferCryptoModal] = useState(false);
-    const [viewMore, setViewMore] = useState(5);
+    const [viewMore, setViewMore] = useState(4);
 
     function viewMoreFunc() {
-        if(viewMore === 5) {
-            setViewMore(10)
+        if(viewMore === 4) {
+            setViewMore(walletUpdated.length)
         } else {
-            setViewMore(5)
+            setViewMore(4)
         }
     }
 
@@ -128,7 +128,7 @@ export function Wallet() {
                         {  walletUpdated.length > 0 ? (
                             <>
                                 <ul id="mobile-wallet" className="grid grid-cols-2 gap-4 sm:hidden mt-4">
-                                    { walletUpdated.map((walletItem, i) => {
+                                    { walletUpdated.slice(0,viewMore).map((walletItem, i) => {
                                         let holding = walletItem.updatedPrice * walletItem.quantity;
                                         let change = (walletItem.updatedPrice - walletItem.average_price) / walletItem.average_price;
             
@@ -163,7 +163,7 @@ export function Wallet() {
                                     }) }
                                 </ul>
 
-                                <div className="hidden sm:flex sm:flex-col sm:w-full pt-6">
+                                <div className="hidden sm:flex sm:flex-col sm:w-full pt-6 pb-2">
                                     <div className="overflow-x-auto">
                                         <div className="py-2 inline-block min-w-full ">
                                         <div className="overflow-hidden">
@@ -189,7 +189,7 @@ export function Wallet() {
                                                 </thead>
 
                                                 <tbody className="[&>*:nth-child(odd)]:bg-white [&>*:nth-child(even)]:bg-secondary-100">
-                                                    { walletUpdated.map((walletItem, i) => {
+                                                    { walletUpdated.slice(0,viewMore).map((walletItem, i) => {
                                                         let holding = walletItem.updatedPrice * walletItem.quantity;
                                                         let change = (walletItem.updatedPrice - walletItem.average_price) / walletItem.average_price;
 
@@ -248,9 +248,9 @@ export function Wallet() {
                             </div>
                         )}
 
-                    {  walletUpdated.length > 0 && (
+                    {  walletUpdated.length > 5 && (
                         <span className='mt-16 text-base text-primary-500 cursor-pointer' onClick={viewMoreFunc}>
-                            { viewMore === 5 ? (
+                            { viewMore === 4 ? (
                                 "View more +"
                             ) : (
                                 "View less -"
