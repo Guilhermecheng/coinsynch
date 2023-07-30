@@ -21,6 +21,10 @@ export default function Home() {
         setTopAssets(response.data);
       }
       getTopAssets();
+
+      // Fetch exchange rates every 5 seconds
+      const intervalId = setInterval(getTopAssets, 5000);
+      return () => clearInterval(intervalId);
     }, []);
 
   return (

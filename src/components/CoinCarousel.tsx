@@ -2,17 +2,26 @@
 
 import { GlobalContext } from "@/contexts/GlobalContext";
 import { MutableRefObject, useContext, useEffect, useRef, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 export function CoinCarousel() {
-  const { topAssets } = useContext(GlobalContext);
-  const [width, setWidth] = useState(0);
+    const { topAssets } = useContext(GlobalContext);
     const carousel = useRef() as MutableRefObject<HTMLDivElement>;
 
-    // useEffect(() => {
-    //     setWidth(carousel?.current.scrollWidth - carousel?.current.offsetWidth);
-    // }, [])
+    const marqueeVariants = {
+        animate: {
+            x: [450, -1570],
+            transition: {
+                x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 25,
+                    ease: "linear",
+                },
+            },
+        },
+    };
 
     useEffect(() => {
         console.log(topAssets)
@@ -27,10 +36,13 @@ export function CoinCarousel() {
     }
 
     return (
-        <div ref={carousel} className="flex text-xs md:text-sm max-w-[344px] overflow-hidden">
-            <ul className="flex no-wrap gap-x-6 overflow-hidden">
-
-                { topAssets.data.map((asset: any, i: number) => {
+        <div ref={carousel} className="flex text-xs md:text-sm relative overflow-hidden w-full h-6">
+            <motion.div 
+                className="flex no-wrap whitespace-nowrap gap-x-6 absolute top-1  will-change-transform"
+                variants={marqueeVariants}
+                animate="animate"
+            >
+                { topAssets.data.slice(0,10).map((asset: any, i: number) => {
                     let price = Number(asset.priceUsd);
                     let change = Number(asset.changePercent24Hr)
 
@@ -42,8 +54,7 @@ export function CoinCarousel() {
                         </li>
                     )
                 }) }
-
-            </ul>
+            </motion.div>
         </div>
     )
 }

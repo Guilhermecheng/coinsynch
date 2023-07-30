@@ -36,7 +36,7 @@ export function Header() {
                         <span>Top Cryptos</span>
                     </div>
                     
-                    <div className="hidden md:flex">
+                    <div className="hidden md:flex max-w-[30%] md:h-6 md:w-full overflow-hidden">
                         <CoinCarousel />
                     </div>
 
@@ -75,9 +75,7 @@ export function Header() {
                 </div>
 
                 <div className="flex w-full items-center justify-center md:hidden h-6 border-t-2 border-t-secondary-200">
-                    <span>
-                        <CoinCarousel />
-                    </span>
+                    <CoinCarousel />
                 </div>
             </header>
         )
