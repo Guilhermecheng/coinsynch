@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Footer } from "@/components/Footer";
@@ -10,14 +10,36 @@ import { GlobalContext } from "@/contexts/GlobalContext";
 import { VerticalMenu } from "@/components/VerticalMenu";
 import { Wallet } from "@/components/Wallet";
 import { Balance } from '@/components/Balance';
+import { Chart } from '@/components/Chart';
+import axios from 'axios';
 
 
 export default function Dashboard() {
     const { isVertMenuOpen, userData } = useContext(GlobalContext);
+    const [dailyVariationAsset, setDailyVariationAsset] = useState({
+        id:"bitcoin",
+        crypto: "BTC",
+        name: "Bitcoin",
+        logo: "/bitcoin.svg",
+        price: 0,
+    });
+
+    const [dailyVariationPercentage, setDailyVariationPercentage] = useState(0);
 
     if(!userData) {
         redirect("/");
     }
+
+    useEffect(() => {
+        async function getDailyVariationData() {
+            const response = await axios.get(`https://api.coincap.io/v2/assets/${dailyVariationAsset.id}`);
+            if(response.status === 200) {
+                let variation = Number(response.data.data.changePercent24Hr);
+                setDailyVariationPercentage(variation);
+            }
+        }
+        getDailyVariationData();
+    }, [])
 
     return (
         <div className="sm:h-[100vh] overflow-hidden">
@@ -40,7 +62,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div className="flex items-center justify-center bg-primary-100 rounded-r-lg">
-                                    <Balance />
+                                <Balance />
                             </div>
                         </div>
 
@@ -50,16 +72,14 @@ export default function Dashboard() {
                                     <h3 className='text-xs text-secondary-500'>Daily Variation</h3>
                                     <div className='flex mt-2 sm:flex-col items-center sm:items-start w-full justify-between'>
                                         <div className='flex items-center'>
-                                            <img src="/ethereum.svg" alt="ETH" />
-                                            <span className='text-xs text-basecolor ml-2'>ETH</span>
+                                            <img src={dailyVariationAsset.logo} alt={dailyVariationAsset.crypto} className="h-4" />
+                                            <span className='text-xs text-basecolor ml-2'>{dailyVariationAsset.crypto}</span>
                                         </div>
-                                        <span className='text-sm text-tertiary-700 sm:mt-2'>+5,65%</span>
+                                        <span className={`text-sm ${dailyVariationPercentage > 0 ? "text-tertiary-700" : "text-quartenary-700"} sm:mt-2`}>{`${dailyVariationPercentage.toFixed(2)} %`}</span>
                                     </div>
                                 </div>
-
-                                {/* <img src="/graph.png" alt="Graph" className="sm:w-[65%]" /> */}
-                                <div className="bg-[url('/graph.png')] bg-cover bg-center bg-no-repeat h-[80px] sm:w-[65%] sm:h-full w-full rounded-b-lg sm:rounded-l-none sm:rounded-r-lg">
-                                    <span></span>
+                                <div className='h-[90px] sm:w-[65%] sm:h-full w-full flex justify-end'>
+                                    <Chart />
                                 </div>
                             </div>
 
